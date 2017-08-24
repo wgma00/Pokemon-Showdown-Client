@@ -25,7 +25,7 @@
 			this.updateUserbar();
 		},
 
-		// userbar
+		// userbarno
 		updateUserbar: function () {
 			var buf = '';
 			var name = ' ' + app.user.get('name');
@@ -925,12 +925,38 @@
 			buf += '<p><label class="label">Username: <strong>' + Tools.escapeHTML(data.username) + '<input type="hidden" name="username" value="' + Tools.escapeHTML(data.username) + '" /></strong></label></p>';
 			buf += '<p><label class="label">Password: <input class="textbox autofocus" type="password" name="password"></label></p>';
 			buf += '<p class="buttonbar"><button type="submit"><strong>Log in</strong></button> <button name="close">Cancel</button></p>';
-
+			buf += '<div class="g-signin2" data-onsuccess="onSuccess" data-gapiscan="true" data-onload="true"></div>';
 			buf += '<p class="or">or</p>';
 			buf += '<p class="buttonbar"><button name="login">Choose another name</button></p>';
 
+			buf += ''
+
 			buf += '</form>';
 			this.$el.html(buf);
+		},
+		onSuccess: function(googleUser) {
+	      console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+	    },
+	    onFailure: function(error) {
+	      console.log(error);
+	    },
+	    renderButton: function() {
+	      gapi.signin2.render('my-signin2', {
+	        'scope': 'profile email',
+	        'width': 240,
+	        'height': 50,
+	        'longtitle': true,
+	        'theme': 'dark',
+	        'onsuccess': onSuccess,
+	        'onfailure': onFailure
+	      });
+	    },
+		onSignIn: function(googleUser) {
+		  var profile = googleUser.getBasicProfile();
+		  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+		  console.log('Name: ' + profile.getName());
+		  console.log('Image URL: ' + profile.getImageUrl());
+		  console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
 		},
 		login: function () {
 			this.close();
