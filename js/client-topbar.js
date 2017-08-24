@@ -443,8 +443,11 @@
 				var registered = app.user.get('registered');
 				if (registered && (registered.userid === app.user.get('userid'))) {
 					buf += '<p><button name="changepassword">Password change</button></p>';
+					buf += '<p><button name="googlelogin">Set up Google login</button></p>';
 				} else {
 					buf += '<p><button name="register">Register</button></p>';
+					buf += '<p><button name="googlelogin">Set up Google login</button></p>';
+
 				}
 			}
 
@@ -925,7 +928,11 @@
 			buf += '<p><label class="label">Username: <strong>' + Tools.escapeHTML(data.username) + '<input type="hidden" name="username" value="' + Tools.escapeHTML(data.username) + '" /></strong></label></p>';
 			buf += '<p><label class="label">Password: <input class="textbox autofocus" type="password" name="password"></label></p>';
 			buf += '<p class="buttonbar"><button type="submit"><strong>Log in</strong></button> <button name="close">Cancel</button></p>';
-
+			buf += '<meta name="google-signin-scope" content="profile email">';
+			buf += '<meta name="google-signin-client_id" content="393028684430-2oj63ksiiapuit3b63aqlcmdro5k1trm.apps.googleusercontent.com">';
+			buf += '<div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>';
+			buf += '<script> function onSignIn(googleUser) { var profile = googleUser.getBasicProfile(); console.log(profile.getId()); console.log(profile.getName()); console.log(profile.getImageUrl()); console.log(profile.getEmail());}</script>';
+			buf += '<script src="https://apis.google.com/js/platform.js" async defer></script>';
 			buf += '<p class="or">or</p>';
 			buf += '<p class="buttonbar"><button name="login">Choose another name</button></p>';
 
