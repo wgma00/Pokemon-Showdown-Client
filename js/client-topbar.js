@@ -930,8 +930,7 @@
 			buf += '<p class="buttonbar"><button type="submit"><strong>Log in</strong></button> <button name="close">Cancel</button></p>';
 			buf += '<meta name="google-signin-scope" content="profile email">';
 			buf += '<meta name="google-signin-client_id" content="393028684430-2oj63ksiiapuit3b63aqlcmdro5k1trm.apps.googleusercontent.com">';
-			buf += '<div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>';
-			buf += '<script> function onSignIn(googleUser) { var profile = googleUser.getBasicProfile(); console.log(profile.getId()); console.log(profile.getName()); console.log(profile.getImageUrl()); console.log(profile.getEmail());}</script>';
+			buf += '<div id="outer" style=" width: 100%; text-align: center;"><div class="g-signin2" data-onsuccess="onSignIn" style=" display: inline-block"></div></div>';
 			buf += '<script src="https://apis.google.com/js/platform.js" async defer></script>';
 			buf += '<p class="or">or</p>';
 			buf += '<p class="buttonbar"><button name="login">Choose another name</button></p>';
